@@ -1,0 +1,47 @@
+app_type: nodejs
+branch: main
+build_command: npm run build
+build_dir: ./
+crate_name: null
+database: null
+environment: null
+github: null
+install_command: npm install
+kafka_brokers: null
+kafka_public_url: null
+kafka_topic: null
+linear: null
+log_files: null
+monitor_expected_code: null
+monitor_interval: null
+monitor_method: null
+monitor_url: null
+npm_script: null
+port: 3000
+port_storybook: null
+project_name: statbot-js
+publish:
+  npm:
+    access: public
+    enabled: true
+    generate_npmrc: true
+    manifest_path: package.json
+    package_name: statbot-js
+    preflight_commands:
+    - npm test
+    - npm run build
+    publish_command: npm publish
+    token: ${NPM_TOKEN}
+    use_wsl: false
+    working_directory: ./
+    wsl_distribution: null
+services: null
+start_command: null
+systemd: null
+systemd_service_name: null
+target: nodejs
+url: null
+url_storybook: null
+version: 0.1.0
+version_targets:
+- package.json

@@ -1,0 +1,3610 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Statbot API",
+    "version": "1.0.0",
+    "description": "Generated from the markdown route captures under `openapi/page-*.md`. This document models the current public GET endpoints captured on June 17, 2026.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.statbot.net",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Activities",
+      "description": "Guild activity and global activity endpoints."
+    },
+    {
+      "name": "Messages",
+      "description": "Guild message stats endpoints."
+    },
+    {
+      "name": "Voice",
+      "description": "Guild voice stats endpoints."
+    },
+    {
+      "name": "Guild Counts",
+      "description": "Guild member, participant, and presence count endpoints."
+    },
+    {
+      "name": "Invites",
+      "description": "Guild invite analytics and invite resource endpoints."
+    },
+    {
+      "name": "Channels",
+      "description": "Guild channel resource endpoints."
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/activities": {
+      "get": {
+        "summary": "Get activities",
+        "description": "Get the list of activities that Statbot is currently tracking across all guilds.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-47.md",
+        "operationId": "getActivities",
+        "tags": [
+          "Activities"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of activities.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Activity"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/activities/series": {
+      "get": {
+        "summary": "Get activity series",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-12-52.md",
+        "operationId": "getActivitySeries",
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistActivities"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistActivities"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/ByActivity"
+          },
+          {
+            "$ref": "#/components/parameters/ByMember"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A timeseries of activity counts. Use the `by_*` query parameters to group data.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActivitySeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/activities/tops/activities": {
+      "get": {
+        "summary": "Get top activities",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-32.md",
+        "operationId": "getTopActivities",
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistActivities"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistActivities"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of top activities for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopActivity"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/messages/series": {
+      "get": {
+        "summary": "Get message series",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-12-34.md",
+        "operationId": "getMessageSeries",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/ByChannel"
+          },
+          {
+            "$ref": "#/components/parameters/ByMember"
+          },
+          {
+            "$ref": "#/components/parameters/ByFlag"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A timeseries of counts. Use the `by_*` query parameters to group data.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MessageSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/messages/tops/members": {
+      "get": {
+        "summary": "Get top message members",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-39.md",
+        "operationId": "getTopMessageMembers",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          },
+          {
+            "$ref": "#/components/parameters/Full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top message members for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PartialTopMember"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TopMember"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/messages/tops/channels": {
+      "get": {
+        "summary": "Get top message channels",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-46.md",
+        "operationId": "getTopMessageChannels",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          },
+          {
+            "$ref": "#/components/parameters/Full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top message channels for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PartialTopChannel"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TopChannelResult"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/messages/sums": {
+      "get": {
+        "summary": "Get count of messages",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-08.md",
+        "operationId": "getMessageCount",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aggregated message count for the selected filters.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SumResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/voice/series": {
+      "get": {
+        "summary": "Get voice series",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-12-45.md",
+        "operationId": "getVoiceSeries",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/ByChannel"
+          },
+          {
+            "$ref": "#/components/parameters/ByMember"
+          },
+          {
+            "$ref": "#/components/parameters/ByState"
+          },
+          {
+            "$ref": "#/components/parameters/ByFlag"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A timeseries of voice activity counts. Use the `by_*` query parameters to group data.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VoiceSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/voice/tops/members": {
+      "get": {
+        "summary": "Get top voice members",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-51.md",
+        "operationId": "getTopVoiceMembers",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          },
+          {
+            "$ref": "#/components/parameters/Full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top voice members for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PartialTopMember"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TopMember"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/voice/tops/channels": {
+      "get": {
+        "summary": "Get top voice channels",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-55.md",
+        "operationId": "getTopVoiceChannels",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          },
+          {
+            "$ref": "#/components/parameters/Full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top voice channels for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PartialTopChannel"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TopChannelResult"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/voice/sums": {
+      "get": {
+        "summary": "Get count of voice activity",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-16.md",
+        "operationId": "getVoiceCount",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aggregated voice minutes for the selected filters.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SumResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/membercounts/series": {
+      "get": {
+        "summary": "Get member count series",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-08.md",
+        "operationId": "getMemberCountSeries",
+        "tags": [
+          "Guild Counts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Member count series for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MemberCountSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/statuses/series": {
+      "get": {
+        "summary": "Get status series",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-13.md",
+        "operationId": "getStatusSeries",
+        "tags": [
+          "Guild Counts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status series for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatusSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/counts/members": {
+      "get": {
+        "summary": "Get members with counts",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-21.md",
+        "operationId": "getMembersWithCounts",
+        "tags": [
+          "Guild Counts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Members with aggregated message and voice counts.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MemberCountsEntry"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/counts/members/series": {
+      "get": {
+        "summary": "Get unique member counts",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-20.md",
+        "operationId": "getUniqueMemberCountSeries",
+        "tags": [
+          "Guild Counts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Stats"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of unique member counts (participants) for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UniqueCountSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/counts/channels/series": {
+      "get": {
+        "summary": "Get unique channel counts",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-24.md",
+        "operationId": "getUniqueChannelCountSeries",
+        "tags": [
+          "Guild Counts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Stats"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistChannels"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistVoiceChannels"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/VoiceStates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of unique channel counts (participants) for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UniqueCountSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/invites/series": {
+      "get": {
+        "summary": "Get invite series",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-16.md",
+        "operationId": "getInviteSeries",
+        "tags": [
+          "Invites"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInvites"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInvites"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInviteFlagsMask"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInviteFlagsType"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInviteFlagsMask"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInviteFlagsType"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/ByInvite"
+          },
+          {
+            "$ref": "#/components/parameters/ByInviter"
+          },
+          {
+            "$ref": "#/components/parameters/ByInvitee"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A timeseries of invite counts. Use the `by_*` query parameters to group data.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InviteSeriesPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/invites/tops/invites": {
+      "get": {
+        "summary": "Get top invites",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-13-59.md",
+        "operationId": "getTopInvites",
+        "tags": [
+          "Invites"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInvites"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInvites"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInviteFlagsMask"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInviteFlagsType"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInviteFlagsMask"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInviteFlagsType"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          },
+          {
+            "$ref": "#/components/parameters/Full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top invites for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PartialTopInvite"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TopInvite"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/invites/tops/members": {
+      "get": {
+        "summary": "Get top invite members",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-03.md",
+        "operationId": "getTopInviteMembers",
+        "tags": [
+          "Invites"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Start"
+          },
+          {
+            "$ref": "#/components/parameters/TimezoneOffset"
+          },
+          {
+            "$ref": "#/components/parameters/Interval"
+          },
+          {
+            "$ref": "#/components/parameters/End"
+          },
+          {
+            "$ref": "#/components/parameters/Bot"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistMembers"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistRoles"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInvites"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInvites"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInviteFlagsMask"
+          },
+          {
+            "$ref": "#/components/parameters/WhitelistInviteFlagsType"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInviteFlagsMask"
+          },
+          {
+            "$ref": "#/components/parameters/BlacklistInviteFlagsType"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/Select"
+          },
+          {
+            "$ref": "#/components/parameters/Full"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top invite members for a guild.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PartialTopInviteMember"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TopInviteMember"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/invites/{invite_id}": {
+      "get": {
+        "summary": "Get invite",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-40.md",
+        "operationId": "getInvite",
+        "tags": [
+          "Invites"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/InviteId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single invite.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invite"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/invites": {
+      "get": {
+        "summary": "Get invites",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-44.md",
+        "operationId": "getInvites",
+        "tags": [
+          "Invites"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of invites.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Invite"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/channels/{channel_id}": {
+      "get": {
+        "summary": "Get channel",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-33.md",
+        "operationId": "getChannel",
+        "tags": [
+          "Channels"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/ChannelId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single channel.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/guilds/{guild_id}/channels": {
+      "get": {
+        "summary": "Get channels",
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "x-source-markdown": "page-2026-06-17-20-14-37.md",
+        "operationId": "getChannels",
+        "tags": [
+          "Channels"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuildId"
+          },
+          {
+            "$ref": "#/components/parameters/Types"
+          },
+          {
+            "$ref": "#/components/parameters/Ids"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of channels.",
+            "headers": {
+              "x-ratelimit-limit": {
+                "$ref": "#/components/headers/XRateLimitLimit"
+              },
+              "x-ratelimit-remaining": {
+                "$ref": "#/components/headers/XRateLimitRemaining"
+              },
+              "x-ratelimit-reset": {
+                "$ref": "#/components/headers/XRateLimitReset"
+              },
+              "retry-after": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChannelResult"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "token",
+        "description": "Statbot API bearer token."
+      }
+    },
+    "headers": {
+      "XRateLimitLimit": {
+        "description": "Maximum number of requests that can be made in the current time window.",
+        "schema": {
+          "type": "integer",
+          "description": "Maximum number of requests in the time window.",
+          "example": 10
+        }
+      },
+      "XRateLimitRemaining": {
+        "description": "Number of requests remaining in the current time window.",
+        "schema": {
+          "type": "integer",
+          "description": "Remaining requests in the time window.",
+          "example": 5
+        }
+      },
+      "XRateLimitReset": {
+        "description": "How many seconds until the rate limit resets.",
+        "schema": {
+          "type": "integer",
+          "description": "Seconds until the rate limit resets.",
+          "example": 60
+        }
+      },
+      "RetryAfter": {
+        "description": "If max requests are reached, the time in seconds to wait before making a new request.",
+        "schema": {
+          "type": "integer",
+          "description": "Seconds to wait before retrying.",
+          "example": 30
+        }
+      }
+    },
+    "parameters": {
+      "GuildId": {
+        "name": "guild_id",
+        "in": "path",
+        "required": true,
+        "description": "Discord guild ID.",
+        "schema": {
+          "$ref": "#/components/schemas/Snowflake"
+        }
+      },
+      "ChannelId": {
+        "name": "channel_id",
+        "in": "path",
+        "required": true,
+        "description": "Discord channel ID.",
+        "schema": {
+          "$ref": "#/components/schemas/Snowflake"
+        }
+      },
+      "InviteId": {
+        "name": "invite_id",
+        "in": "path",
+        "required": true,
+        "description": "Statbot ID of the invite.",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Start": {
+        "name": "start",
+        "in": "query",
+        "description": "Minimum timestamp in milliseconds since epoch.",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "TimezoneOffset": {
+        "name": "timezone_offset",
+        "in": "query",
+        "description": "Timezone offset in hours. For example, `-3` for UTC-3.",
+        "schema": {
+          "type": "number",
+          "minimum": -12,
+          "maximum": 14
+        }
+      },
+      "Interval": {
+        "name": "interval",
+        "in": "query",
+        "description": "Time interval for the query. Defaults to `day`.",
+        "schema": {
+          "$ref": "#/components/schemas/Interval"
+        }
+      },
+      "End": {
+        "name": "end",
+        "in": "query",
+        "description": "Maximum timestamp in milliseconds since epoch. If not provided, the current time is used.",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "Bot": {
+        "name": "bot",
+        "in": "query",
+        "description": "If `true`, only include bot users. If `false`, only include non-bot users.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "WhitelistMembers": {
+        "name": "whitelist_members[]",
+        "in": "query",
+        "description": "List of member Discord IDs to whitelist. Cannot be used with `blacklist_members[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "BlacklistMembers": {
+        "name": "blacklist_members[]",
+        "in": "query",
+        "description": "List of member Discord IDs to blacklist. Cannot be used with `whitelist_members[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "WhitelistRoles": {
+        "name": "whitelist_roles[]",
+        "in": "query",
+        "description": "List of role Discord IDs to whitelist.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "BlacklistRoles": {
+        "name": "blacklist_roles[]",
+        "in": "query",
+        "description": "List of role Discord IDs to blacklist.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "WhitelistChannels": {
+        "name": "whitelist_channels[]",
+        "in": "query",
+        "description": "List of channel Discord IDs to whitelist. Cannot be used with `blacklist_channels[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "BlacklistChannels": {
+        "name": "blacklist_channels[]",
+        "in": "query",
+        "description": "List of channel Discord IDs to blacklist. Cannot be used with `whitelist_channels[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "WhitelistVoiceChannels": {
+        "name": "whitelist_voice_channels[]",
+        "in": "query",
+        "description": "List of voice channel Discord IDs to whitelist. Cannot be used with `blacklist_voice_channels[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "BlacklistVoiceChannels": {
+        "name": "blacklist_voice_channels[]",
+        "in": "query",
+        "description": "List of voice channel Discord IDs to blacklist. Cannot be used with `whitelist_voice_channels[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "VoiceStates": {
+        "name": "voice_states[]",
+        "in": "query",
+        "description": "List of voice states to include in the results.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/VoiceState"
+          }
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Maximum number of results to return. Cannot be used with `page_size`, `page`, or `select[]`.",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Order": {
+        "name": "order",
+        "in": "query",
+        "description": "Order of the results. Sorts by `timestamp` for series data and by `rank` for top data.",
+        "schema": {
+          "$ref": "#/components/schemas/SortOrder"
+        }
+      },
+      "PageSize": {
+        "name": "page_size",
+        "in": "query",
+        "description": "Number of results per page. Requires `page` and cannot be used with `limit` or `select[]`.",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Page": {
+        "name": "page",
+        "in": "query",
+        "description": "Page number for pagination. Requires `page_size` and cannot be used with `limit` or `select[]`.",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Select": {
+        "name": "select[]",
+        "in": "query",
+        "description": "IDs to select in the top query. Cannot be used with `limit`, `page_size`, or `page`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      },
+      "Full": {
+        "name": "full",
+        "in": "query",
+        "description": "If `true`, include the full optional fields in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByChannel": {
+        "name": "by_channel",
+        "in": "query",
+        "description": "If `true`, group counts by channel with the `channelId` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByMember": {
+        "name": "by_member",
+        "in": "query",
+        "description": "If `true`, group counts by member with the `memberId` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByFlag": {
+        "name": "by_flag",
+        "in": "query",
+        "description": "If `true`, group counts by flags with the `flags` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByState": {
+        "name": "by_state",
+        "in": "query",
+        "description": "If `true`, group voice activity by state with the `type` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByActivity": {
+        "name": "by_activity",
+        "in": "query",
+        "description": "If `true`, group activity counts by activity with the `activityId` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "WhitelistActivities": {
+        "name": "whitelist_activities[]",
+        "in": "query",
+        "description": "List of activity IDs to whitelist. Cannot be used with `blacklist_activities[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "BlacklistActivities": {
+        "name": "blacklist_activities[]",
+        "in": "query",
+        "description": "List of activity IDs to blacklist. Cannot be used with `whitelist_activities[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "WhitelistInvites": {
+        "name": "whitelist_invites[]",
+        "in": "query",
+        "description": "List of invite IDs to whitelist. Cannot be used with `blacklist_invites[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "BlacklistInvites": {
+        "name": "blacklist_invites[]",
+        "in": "query",
+        "description": "List of invite IDs to blacklist. Cannot be used with `whitelist_invites[]`.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "WhitelistInviteFlagsMask": {
+        "name": "whitelist_invite_flags_mask",
+        "in": "query",
+        "description": "Bitwise OR of invite flags to whitelist. Requires `whitelist_invite_flags_type`.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "WhitelistInviteFlagsType": {
+        "name": "whitelist_invite_flags_type",
+        "in": "query",
+        "description": "Type of invite flag filtering to apply for the whitelist.",
+        "schema": {
+          "$ref": "#/components/schemas/InviteFlagFilterType"
+        }
+      },
+      "BlacklistInviteFlagsMask": {
+        "name": "blacklist_invite_flags_mask",
+        "in": "query",
+        "description": "Bitwise OR of invite flags to blacklist. Requires `blacklist_invite_flags_type`.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "BlacklistInviteFlagsType": {
+        "name": "blacklist_invite_flags_type",
+        "in": "query",
+        "description": "Type of invite flag filtering to apply for the blacklist.",
+        "schema": {
+          "$ref": "#/components/schemas/InviteFlagFilterType"
+        }
+      },
+      "ByInvite": {
+        "name": "by_invite",
+        "in": "query",
+        "description": "If `true`, group counts by invite with the `inviteId` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByInviter": {
+        "name": "by_inviter",
+        "in": "query",
+        "description": "If `true`, group counts by inviter with the `inviterId` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ByInvitee": {
+        "name": "by_invitee",
+        "in": "query",
+        "description": "If `true`, group counts by invitee with the `inviteeId` field in the response.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "Stats": {
+        "name": "stats[]",
+        "in": "query",
+        "description": "Stat types to include in the results. Source docs describe this as required, but also state all stat types are used when omitted.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/UniqueCountStat"
+          }
+        },
+        "required": false
+      },
+      "Types": {
+        "name": "types[]",
+        "in": "query",
+        "description": "Channel types to include in the response.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              2,
+              4,
+              5,
+              13,
+              15,
+              999
+            ]
+          }
+        }
+      },
+      "Ids": {
+        "name": "ids[]",
+        "in": "query",
+        "description": "Specific Discord channel IDs to include in the response.",
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Snowflake"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UnauthorizedError"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Snowflake": {
+        "type": "string",
+        "pattern": "^[0-9]+$",
+        "description": "Discord snowflake ID.",
+        "examples": [
+          "123456789012345678"
+        ]
+      },
+      "Interval": {
+        "type": "string",
+        "enum": [
+          "hour",
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "SortOrder": {
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ]
+      },
+      "VoiceState": {
+        "type": "string",
+        "enum": [
+          "normal",
+          "afk",
+          "self_mute",
+          "self_deaf",
+          "server_mute",
+          "server_deaf"
+        ]
+      },
+      "InviteFlagFilterType": {
+        "type": "string",
+        "enum": [
+          "any",
+          "all"
+        ]
+      },
+      "UniqueCountStat": {
+        "type": "string",
+        "enum": [
+          "text",
+          "voice"
+        ]
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized response message."
+          }
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "applicationId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Statbot ID of the activity.",
+            "example": 791
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the activity.",
+            "example": "Spore"
+          },
+          "applicationId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Snowflake"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Discord ID of the application associated with the activity.",
+            "examples": [
+              "406645798680657920",
+              null
+            ]
+          }
+        }
+      },
+      "Channel": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "parentId",
+          "isActive"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the channel.",
+            "example": "general"
+          },
+          "type": {
+            "type": "integer",
+            "description": "Discord channel type, or `999` for Statbot Aggregate Channels."
+          },
+          "parentId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Snowflake"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Discord ID of the parent channel, if any."
+          },
+          "isActive": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "Whether the channel still exists in Discord."
+          }
+        }
+      },
+      "AggregateChannel": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "parentId",
+          "aggregate",
+          "autoMergeEnabled",
+          "autoMergeChannelIds",
+          "autoMergeTypes",
+          "createdUnixTimestamp"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the channel.",
+            "example": "general"
+          },
+          "type": {
+            "type": "integer",
+            "description": "Discord channel type, or `999` for Statbot Aggregate Channels."
+          },
+          "parentId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Snowflake"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Discord ID of the parent channel, if any."
+          },
+          "aggregate": {
+            "type": "boolean",
+            "description": "Whether the channel is an aggregate channel."
+          },
+          "autoMergeEnabled": {
+            "type": "boolean",
+            "description": "Whether auto-merge is enabled for this Aggregate Channel."
+          },
+          "autoMergeChannelIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snowflake"
+            },
+            "description": "List of channel IDs that data is auto-merged from."
+          },
+          "autoMergeTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text",
+                "voice"
+              ]
+            },
+            "description": "Data types to auto-merge."
+          },
+          "createdUnixTimestamp": {
+            "type": "integer",
+            "description": "Unix timestamp in milliseconds when the Aggregate Channel was created."
+          }
+        }
+      },
+      "Invite": {
+        "type": "object",
+        "required": [
+          "id",
+          "memberId",
+          "channelId",
+          "code",
+          "uses",
+          "maxUses",
+          "maxAge",
+          "isTemporary",
+          "isVanity",
+          "isActive",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Statbot ID of the invite.",
+            "minimum": 1,
+            "example": 456
+          },
+          "memberId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "channelId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "code": {
+            "type": "string",
+            "description": "Discord invite code.",
+            "example": "abc123"
+          },
+          "uses": {
+            "type": "integer",
+            "description": "Number of times the invite has been used."
+          },
+          "maxUses": {
+            "type": "integer",
+            "description": "Maximum number of times the invite can be used."
+          },
+          "maxAge": {
+            "type": "integer",
+            "description": "Maximum age of the invite in seconds."
+          },
+          "isTemporary": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "Whether the invite grants temporary membership (0 = false, 1 = true)."
+          },
+          "isVanity": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "Whether the invite is a vanity URL (0 = false, 1 = true)."
+          },
+          "isActive": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "Whether the invite is currently active (0 = false, 1 = true)."
+          },
+          "label": {
+            "type": "string",
+            "description": "Custom label for the invite.",
+            "example": "My Invite"
+          }
+        }
+      },
+      "MessageSeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "count"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of messages."
+          },
+          "memberId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "channelId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "flags": {
+            "type": "integer",
+            "description": "Bitwise flags of the messages in the data point. BOT=1, THREAD=2, VOICE=4."
+          }
+        }
+      },
+      "VoiceSeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "count"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of minutes."
+          },
+          "memberId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "channelId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "flags": {
+            "type": "integer",
+            "description": "Bitwise flags of the voice activity in the data point. BOT=1, GUEST=2."
+          },
+          "type": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "description": "Type of voice activity: normal=1, afk=2, self_mute=3, self_deaf=4, server_mute=5, server_deaf=6."
+          }
+        }
+      },
+      "ActivitySeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "count"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of minutes."
+          },
+          "memberId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "activityId": {
+            "type": "integer",
+            "description": "Statbot ID of the activity.",
+            "example": 789
+          },
+          "activityType": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "description": "Type of activity. playing=0, streaming=1, listening=2."
+          }
+        }
+      },
+      "MemberCountSeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "count",
+          "joins",
+          "leaves"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of members."
+          },
+          "joins": {
+            "type": "integer",
+            "description": "Number of joins."
+          },
+          "leaves": {
+            "type": "integer",
+            "description": "Number of leaves."
+          }
+        }
+      },
+      "StatusSeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "online",
+          "dnd",
+          "idle"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "online": {
+            "type": "integer",
+            "description": "Number of online members."
+          },
+          "dnd": {
+            "type": "integer",
+            "description": "Number of members with Do Not Disturb status."
+          },
+          "idle": {
+            "type": "integer",
+            "description": "Number of members with Idle status."
+          }
+        }
+      },
+      "InviteSeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "count"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of members invited."
+          },
+          "inviteId": {
+            "type": "integer",
+            "description": "Statbot ID of the invite."
+          },
+          "inviterId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "inviteeId": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "flags": {
+            "type": "integer",
+            "description": "Bitwise flags for suspicious invite attribution. SELF=1, ALREADY_JOINED=2, NEW_ACCOUNT=4, NEW_MEMBER=8, NO_AVATAR=16, REQUIRE_ROLE=32, REQUIRE_ONBOARDING=64, REQUIRE_HOME_ACTIONS=128, PENDING=256, MEMBER_LEFT=512, BOT=1024, TEMPORARY=2048."
+          }
+        }
+      },
+      "UniqueCountSeriesPoint": {
+        "type": "object",
+        "required": [
+          "unixTimestamp",
+          "count"
+        ],
+        "properties": {
+          "unixTimestamp": {
+            "type": "integer",
+            "description": "Timestamp of the event in ms.",
+            "example": 1770359067560
+          },
+          "count": {
+            "type": "integer",
+            "description": "Count value."
+          }
+        }
+      },
+      "SumResponse": {
+        "type": "object",
+        "required": [
+          "count"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Aggregate count value."
+          }
+        }
+      },
+      "PartialTopMember": {
+        "type": "object",
+        "required": [
+          "id",
+          "rank",
+          "count",
+          "channelCount"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "rank": {
+            "type": "integer",
+            "description": "Rank in data set."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Count value for the top member entry."
+          },
+          "channelCount": {
+            "type": "integer",
+            "description": "Number of channels the member participated in."
+          }
+        }
+      },
+      "TopMember": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartialTopMember"
+          },
+          {
+            "type": "object",
+            "required": [
+              "username",
+              "type",
+              "globalName",
+              "nick",
+              "avatar",
+              "guildAvatar"
+            ],
+            "properties": {
+              "username": {
+                "type": "string",
+                "description": "Member username.",
+                "example": "statbot"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "user",
+                  "bot"
+                ],
+                "description": "Type of user.",
+                "example": "user"
+              },
+              "globalName": {
+                "type": "string",
+                "description": "Member global name, or empty string when not available.",
+                "example": "Statbot"
+              },
+              "nick": {
+                "type": "string",
+                "description": "Member guild nickname, or empty string when not available.",
+                "example": "Best Bot"
+              },
+              "avatar": {
+                "type": "string",
+                "description": "Member avatar hash, or empty string when not available.",
+                "example": "abc123def456"
+              },
+              "guildAvatar": {
+                "type": "string",
+                "description": "Member guild avatar hash, or empty string when not available.",
+                "example": "abc123def456"
+              }
+            }
+          }
+        ]
+      },
+      "PartialTopChannel": {
+        "type": "object",
+        "required": [
+          "rank",
+          "count",
+          "memberCount"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "description": "Rank in data set."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Count value for the top channel entry."
+          },
+          "memberCount": {
+            "type": "integer",
+            "description": "Number of members that participated in the channel."
+          }
+        }
+      },
+      "TopChannel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartialTopChannel"
+          },
+          {
+            "$ref": "#/components/schemas/Channel"
+          }
+        ]
+      },
+      "TopAggregateChannel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartialTopChannel"
+          },
+          {
+            "$ref": "#/components/schemas/AggregateChannel"
+          }
+        ]
+      },
+      "TopActivity": {
+        "type": "object",
+        "required": [
+          "applicationId",
+          "count",
+          "id",
+          "name",
+          "rank"
+        ],
+        "properties": {
+          "applicationId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Snowflake"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Discord ID of the application associated with the activity."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of minutes."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Statbot ID of the activity.",
+            "example": 791
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the activity.",
+            "example": "Spore"
+          },
+          "rank": {
+            "type": "integer",
+            "description": "Rank in data set."
+          }
+        }
+      },
+      "PartialTopInvite": {
+        "type": "object",
+        "required": [
+          "id",
+          "rank",
+          "count",
+          "memberCount"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Statbot ID of the invite.",
+            "minimum": 1
+          },
+          "rank": {
+            "type": "integer",
+            "description": "Rank in data set."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of members invited."
+          },
+          "memberCount": {
+            "type": "integer",
+            "description": "Number of unique members invited."
+          }
+        }
+      },
+      "TopInvite": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartialTopInvite"
+          },
+          {
+            "type": "object",
+            "required": [
+              "code",
+              "label",
+              "memberId"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Discord invite code.",
+                "example": "abc123"
+              },
+              "label": {
+                "type": "string",
+                "description": "Custom label for the invite.",
+                "example": "My Invite"
+              },
+              "memberId": {
+                "$ref": "#/components/schemas/Snowflake"
+              }
+            }
+          }
+        ]
+      },
+      "PartialTopInviteMember": {
+        "type": "object",
+        "required": [
+          "id",
+          "rank",
+          "count"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "rank": {
+            "type": "integer",
+            "description": "Rank in data set."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of members invited."
+          }
+        }
+      },
+      "TopInviteMember": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartialTopInviteMember"
+          },
+          {
+            "type": "object",
+            "required": [
+              "username",
+              "type",
+              "globalName",
+              "nick",
+              "avatar",
+              "guildAvatar"
+            ],
+            "properties": {
+              "username": {
+                "type": "string",
+                "description": "Member username.",
+                "example": "statbot"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "user",
+                  "bot"
+                ],
+                "description": "Type of user.",
+                "example": "user"
+              },
+              "globalName": {
+                "type": "string",
+                "description": "Member global name, or empty string when not available.",
+                "example": "Statbot"
+              },
+              "nick": {
+                "type": "string",
+                "description": "Member guild nickname, or empty string when not available.",
+                "example": "Best Bot"
+              },
+              "avatar": {
+                "type": "string",
+                "description": "Member avatar hash, or empty string when not available.",
+                "example": "abc123def456"
+              },
+              "guildAvatar": {
+                "type": "string",
+                "description": "Member guild avatar hash, or empty string when not available.",
+                "example": "abc123def456"
+              }
+            }
+          }
+        ]
+      },
+      "MemberCountsEntry": {
+        "type": "object",
+        "required": [
+          "id",
+          "messageCount",
+          "voiceCount",
+          "messageChannelCount",
+          "voiceChannelCount",
+          "username",
+          "type",
+          "globalName",
+          "nick",
+          "avatar",
+          "guildAvatar"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Snowflake"
+          },
+          "messageCount": {
+            "type": "integer",
+            "description": "Count of messages associated with the data point."
+          },
+          "voiceCount": {
+            "type": "integer",
+            "description": "Count of voice activity associated with the data point."
+          },
+          "messageChannelCount": {
+            "type": "integer",
+            "description": "Number of message channels associated with the data point."
+          },
+          "voiceChannelCount": {
+            "type": "integer",
+            "description": "Number of voice channels associated with the data point."
+          },
+          "username": {
+            "type": "string",
+            "description": "Member username.",
+            "example": "statbot"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "bot"
+            ],
+            "description": "Type of user.",
+            "example": "user"
+          },
+          "globalName": {
+            "type": "string",
+            "description": "Member global name, or empty string when not available.",
+            "example": "Statbot"
+          },
+          "nick": {
+            "type": "string",
+            "description": "Member guild nickname, or empty string when not available.",
+            "example": "Best Bot"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "Member avatar hash, or empty string when not available.",
+            "example": "abc123def456"
+          },
+          "guildAvatar": {
+            "type": "string",
+            "description": "Member guild avatar hash, or empty string when not available.",
+            "example": "abc123def456"
+          }
+        }
+      },
+      "ChannelResult": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Channel"
+          },
+          {
+            "$ref": "#/components/schemas/AggregateChannel"
+          }
+        ]
+      },
+      "TopChannelResult": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TopChannel"
+          },
+          {
+            "$ref": "#/components/schemas/TopAggregateChannel"
+          }
+        ]
+      }
+    }
+  },
+  "x-generated-from": {
+    "routeMarkdownCount": 23,
+    "documentedOperations": 23,
+    "generatedAt": "2026-06-17T20:37:20.813Z"
+  }
+}
