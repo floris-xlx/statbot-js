@@ -1,5 +1,7 @@
 # statbot-js
 
+current version: `0.1.0`
+
 Type-safe JavaScript SDK for the Statbot API, generated from the code-backed OpenAPI definitions in [openapi](/C:/Users/floris/Documents/GitHub/statbot-js/openapi).
 
 ## What this repo contains
