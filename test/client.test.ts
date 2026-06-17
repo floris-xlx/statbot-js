@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { StatbotClient } from "../src/client.js";
+import { StatbotValidationError } from "../src/errors.js";
 
 describe("StatbotClient", () => {
   it("serializes array query parameters with bracket suffixes", async () => {
@@ -17,7 +18,7 @@ describe("StatbotClient", () => {
     });
 
     await client.getMessageSeries("123456789012345678", {
-      whitelist_members: ["111", "222"],
+      whitelist_members: ["111111111111111111", "222222222222222222"],
       by_member: true,
     });
 
@@ -26,7 +27,7 @@ describe("StatbotClient", () => {
 
     const request = requestCall![0] as unknown as Request;
     expect(request.url).toContain(
-      "whitelist_members[]=111&whitelist_members[]=222",
+      "whitelist_members[]=111111111111111111&whitelist_members[]=222222222222222222",
     );
     expect(request.url).toContain("by_member=true");
   });
@@ -51,5 +52,35 @@ describe("StatbotClient", () => {
 
     await client.getActivities();
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("rejects invalid snowflake ids before sending the request", async () => {
+    const fetchMock = vi.fn();
+
+    const client = new StatbotClient({
+      fetch: fetchMock as typeof globalThis.fetch,
+    });
+
+    expect(() => client.getChannel("bad-id", "234567890123456789")).toThrow(
+      StatbotValidationError,
+    );
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("rejects conflicting top-query pagination options", async () => {
+    const fetchMock = vi.fn();
+
+    const client = new StatbotClient({
+      fetch: fetchMock as typeof globalThis.fetch,
+    });
+
+    expect(() =>
+      client.getTopMessageMembers("123456789012345678", {
+        limit: 10,
+        page_size: 25,
+        page: 1,
+      }),
+    ).toThrow(StatbotValidationError);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

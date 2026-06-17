@@ -81,7 +81,6 @@ function withCommonMetadata(page, operation) {
     summary: page.summary,
     description: page.description,
     security: [{ BearerAuth: [] }],
-    "x-source-markdown": page.file,
     ...operation,
   };
 }

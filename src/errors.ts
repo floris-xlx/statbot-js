@@ -1,3 +1,5 @@
+import { z, type ZodError } from "zod";
+
 export class StatbotApiError<TBody = unknown> extends Error {
   readonly status: number;
   readonly body: TBody;
@@ -9,5 +11,15 @@ export class StatbotApiError<TBody = unknown> extends Error {
     this.status = status;
     this.body = body;
     this.response = response;
+  }
+}
+
+export class StatbotValidationError extends Error {
+  readonly cause: ZodError;
+
+  constructor(context: string, error: ZodError) {
+    super(`${context}\n${z.prettifyError(error)}`);
+    this.name = "StatbotValidationError";
+    this.cause = error;
   }
 }

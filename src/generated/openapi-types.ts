@@ -31,7 +31,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get activity series */
+        /**
+         * Get activity series
+         * @description Get activity series data for a guild.
+         */
         get: operations["getActivitySeries"];
         put?: never;
         post?: never;
@@ -48,7 +51,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top activities */
+        /**
+         * Get top activities
+         * @description Get top activities (e.g. playing, streaming, etc.) for a guild.
+         */
         get: operations["getTopActivities"];
         put?: never;
         post?: never;
@@ -65,7 +71,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get message series */
+        /**
+         * Get message series
+         * @description Get message series data for a guild.
+         */
         get: operations["getMessageSeries"];
         put?: never;
         post?: never;
@@ -82,7 +91,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top message members */
+        /**
+         * Get top message members
+         * @description Get top message members for a guild.
+         */
         get: operations["getTopMessageMembers"];
         put?: never;
         post?: never;
@@ -99,7 +111,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top message channels */
+        /**
+         * Get top message channels
+         * @description Get top message channels for a guild.
+         */
         get: operations["getTopMessageChannels"];
         put?: never;
         post?: never;
@@ -116,7 +131,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get count of messages */
+        /**
+         * Get count of messages
+         * @description Get the aggregate count of messages for a guild.
+         */
         get: operations["getMessageCount"];
         put?: never;
         post?: never;
@@ -133,7 +151,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get voice series */
+        /**
+         * Get voice series
+         * @description Get voice activity series data for a guild.
+         */
         get: operations["getVoiceSeries"];
         put?: never;
         post?: never;
@@ -150,7 +171,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top voice members */
+        /**
+         * Get top voice members
+         * @description Get top voice members for a guild.
+         */
         get: operations["getTopVoiceMembers"];
         put?: never;
         post?: never;
@@ -167,7 +191,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top voice channels */
+        /**
+         * Get top voice channels
+         * @description Get top voice channels for a guild.
+         */
         get: operations["getTopVoiceChannels"];
         put?: never;
         post?: never;
@@ -184,7 +211,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get count of voice activity */
+        /**
+         * Get count of voice activity
+         * @description Get the aggregate count of voice activity minutes for a guild.
+         */
         get: operations["getVoiceCount"];
         put?: never;
         post?: never;
@@ -201,7 +231,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get member count series */
+        /**
+         * Get member count series
+         * @description Get a series of guild member counts over time.
+         */
         get: operations["getMemberCountSeries"];
         put?: never;
         post?: never;
@@ -218,7 +251,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get status series */
+        /**
+         * Get status series
+         * @description Get a series of guild member presence counts over time.
+         */
         get: operations["getStatusSeries"];
         put?: never;
         post?: never;
@@ -235,7 +271,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get members with counts */
+        /**
+         * Get members with counts
+         * @description Get guild members with aggregated message and voice counts.
+         */
         get: operations["getMembersWithCounts"];
         put?: never;
         post?: never;
@@ -252,7 +291,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get unique member counts */
+        /**
+         * Get unique member counts
+         * @description Get a series of counts of unique members for a guild.
+         */
         get: operations["getUniqueMemberCountSeries"];
         put?: never;
         post?: never;
@@ -269,7 +311,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get unique channel counts */
+        /**
+         * Get unique channel counts
+         * @description Get a series of counts of unique channels for a guild.
+         */
         get: operations["getUniqueChannelCountSeries"];
         put?: never;
         post?: never;
@@ -286,7 +331,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get invite series */
+        /**
+         * Get invite series
+         * @description Get invite series data for a guild.
+         */
         get: operations["getInviteSeries"];
         put?: never;
         post?: never;
@@ -303,7 +351,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top invites */
+        /**
+         * Get top invites
+         * @description Get top invites for a guild.
+         */
         get: operations["getTopInvites"];
         put?: never;
         post?: never;
@@ -320,7 +371,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get top invite members */
+        /**
+         * Get top invite members
+         * @description Get top invite members for a guild.
+         */
         get: operations["getTopInviteMembers"];
         put?: never;
         post?: never;
@@ -337,7 +391,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get invite */
+        /**
+         * Get invite
+         * @description Get invite for a guild.
+         */
         get: operations["getInvite"];
         put?: never;
         post?: never;
@@ -354,7 +411,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get invites */
+        /**
+         * Get invites
+         * @description Get invites for a guild.
+         */
         get: operations["getInvites"];
         put?: never;
         post?: never;
@@ -371,7 +431,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get channel */
+        /**
+         * Get channel
+         * @description Get channel for a guild.
+         */
         get: operations["getChannel"];
         put?: never;
         post?: never;
@@ -388,7 +451,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get channels */
+        /**
+         * Get channels
+         * @description Get channels for a guild.
+         */
         get: operations["getChannels"];
         put?: never;
         post?: never;

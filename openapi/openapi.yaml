@@ -2,8 +2,8 @@ openapi: 3.1.0
 info:
   title: Statbot API
   version: 1.0.0
-  description: Generated from the markdown route captures under
-    `openapi/page-*.md`. This document models the current public GET endpoints
+  description: Generated from the code-backed route definitions under
+    `scripts/openapi`. This document models the current public GET endpoints
     captured on June 17, 2026.
   license:
     name: MIT
@@ -34,7 +34,6 @@ paths:
         across all guilds.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-47.md
       operationId: getActivities
       tags:
         - Activities
@@ -61,10 +60,9 @@ paths:
   /v1/guilds/{guild_id}/activities/series:
     get:
       summary: Get activity series
-      description: ""
+      description: Get activity series data for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-12-52.md
       operationId: getActivitySeries
       tags:
         - Activities
@@ -108,10 +106,9 @@ paths:
   /v1/guilds/{guild_id}/activities/tops/activities:
     get:
       summary: Get top activities
-      description: ""
+      description: Get top activities (e.g. playing, streaming, etc.) for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-32.md
       operationId: getTopActivities
       tags:
         - Activities
@@ -155,10 +152,9 @@ paths:
   /v1/guilds/{guild_id}/messages/series:
     get:
       summary: Get message series
-      description: ""
+      description: Get message series data for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-12-34.md
       operationId: getMessageSeries
       tags:
         - Messages
@@ -206,10 +202,9 @@ paths:
   /v1/guilds/{guild_id}/messages/tops/members:
     get:
       summary: Get top message members
-      description: ""
+      description: Get top message members for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-39.md
       operationId: getTopMessageMembers
       tags:
         - Messages
@@ -261,10 +256,9 @@ paths:
   /v1/guilds/{guild_id}/messages/tops/channels:
     get:
       summary: Get top message channels
-      description: ""
+      description: Get top message channels for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-46.md
       operationId: getTopMessageChannels
       tags:
         - Messages
@@ -316,10 +310,9 @@ paths:
   /v1/guilds/{guild_id}/messages/sums:
     get:
       summary: Get count of messages
-      description: ""
+      description: Get the aggregate count of messages for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-08.md
       operationId: getMessageCount
       tags:
         - Messages
@@ -359,10 +352,9 @@ paths:
   /v1/guilds/{guild_id}/voice/series:
     get:
       summary: Get voice series
-      description: ""
+      description: Get voice activity series data for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-12-45.md
       operationId: getVoiceSeries
       tags:
         - Voice
@@ -412,10 +404,9 @@ paths:
   /v1/guilds/{guild_id}/voice/tops/members:
     get:
       summary: Get top voice members
-      description: ""
+      description: Get top voice members for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-51.md
       operationId: getTopVoiceMembers
       tags:
         - Voice
@@ -468,10 +459,9 @@ paths:
   /v1/guilds/{guild_id}/voice/tops/channels:
     get:
       summary: Get top voice channels
-      description: ""
+      description: Get top voice channels for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-55.md
       operationId: getTopVoiceChannels
       tags:
         - Voice
@@ -524,10 +514,9 @@ paths:
   /v1/guilds/{guild_id}/voice/sums:
     get:
       summary: Get count of voice activity
-      description: ""
+      description: Get the aggregate count of voice activity minutes for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-16.md
       operationId: getVoiceCount
       tags:
         - Voice
@@ -568,10 +557,9 @@ paths:
   /v1/guilds/{guild_id}/membercounts/series:
     get:
       summary: Get member count series
-      description: ""
+      description: Get a series of guild member counts over time.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-08.md
       operationId: getMemberCountSeries
       tags:
         - Guild Counts
@@ -606,10 +594,9 @@ paths:
   /v1/guilds/{guild_id}/statuses/series:
     get:
       summary: Get status series
-      description: ""
+      description: Get a series of guild member presence counts over time.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-13.md
       operationId: getStatusSeries
       tags:
         - Guild Counts
@@ -644,10 +631,9 @@ paths:
   /v1/guilds/{guild_id}/counts/members:
     get:
       summary: Get members with counts
-      description: ""
+      description: Get guild members with aggregated message and voice counts.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-21.md
       operationId: getMembersWithCounts
       tags:
         - Guild Counts
@@ -690,10 +676,9 @@ paths:
   /v1/guilds/{guild_id}/counts/members/series:
     get:
       summary: Get unique member counts
-      description: ""
+      description: Get a series of counts of unique members for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-20.md
       operationId: getUniqueMemberCountSeries
       tags:
         - Guild Counts
@@ -739,10 +724,9 @@ paths:
   /v1/guilds/{guild_id}/counts/channels/series:
     get:
       summary: Get unique channel counts
-      description: ""
+      description: Get a series of counts of unique channels for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-24.md
       operationId: getUniqueChannelCountSeries
       tags:
         - Guild Counts
@@ -788,10 +772,9 @@ paths:
   /v1/guilds/{guild_id}/invites/series:
     get:
       summary: Get invite series
-      description: ""
+      description: Get invite series data for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-16.md
       operationId: getInviteSeries
       tags:
         - Invites
@@ -841,10 +824,9 @@ paths:
   /v1/guilds/{guild_id}/invites/tops/invites:
     get:
       summary: Get top invites
-      description: ""
+      description: Get top invites for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-13-59.md
       operationId: getTopInvites
       tags:
         - Invites
@@ -898,10 +880,9 @@ paths:
   /v1/guilds/{guild_id}/invites/tops/members:
     get:
       summary: Get top invite members
-      description: ""
+      description: Get top invite members for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-03.md
       operationId: getTopInviteMembers
       tags:
         - Invites
@@ -955,10 +936,9 @@ paths:
   /v1/guilds/{guild_id}/invites/{invite_id}:
     get:
       summary: Get invite
-      description: ""
+      description: Get invite for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-40.md
       operationId: getInvite
       tags:
         - Invites
@@ -986,10 +966,9 @@ paths:
   /v1/guilds/{guild_id}/invites:
     get:
       summary: Get invites
-      description: ""
+      description: Get invites for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-44.md
       operationId: getInvites
       tags:
         - Invites
@@ -1018,10 +997,9 @@ paths:
   /v1/guilds/{guild_id}/channels/{channel_id}:
     get:
       summary: Get channel
-      description: ""
+      description: Get channel for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-33.md
       operationId: getChannel
       tags:
         - Channels
@@ -1049,10 +1027,9 @@ paths:
   /v1/guilds/{guild_id}/channels:
     get:
       summary: Get channels
-      description: ""
+      description: Get channels for a guild.
       security:
         - BearerAuth: []
-      x-source-markdown: page-2026-06-17-20-14-37.md
       operationId: getChannels
       tags:
         - Channels
@@ -2132,5 +2109,5 @@ components:
         - $ref: "#/components/schemas/TopChannel"
         - $ref: "#/components/schemas/TopAggregateChannel"
 x-generated-from:
-  routeMarkdownCount: 23
+  routeDefinitionCount: 23
   documentedOperations: 23

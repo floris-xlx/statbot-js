@@ -1,194 +1,65 @@
-export type Snowflake = string;
-export type Interval = "hour" | "day" | "week" | "month";
-export type SortOrder = "asc" | "desc";
-export type VoiceState =
-  | "normal"
-  | "afk"
-  | "self_mute"
-  | "self_deaf"
-  | "server_mute"
-  | "server_deaf";
-export type InviteFlagFilterType = "any" | "all";
-export type UniqueCountStat = "text" | "voice";
-export type ChannelFilterType = 0 | 2 | 4 | 5 | 13 | 15 | 999;
+import type { z } from "zod";
+import {
+  ActivitySeriesQuerySchema,
+  ChannelFilterTypeSchema,
+  GetChannelsQuerySchema,
+  IntervalSchema,
+  InviteFlagFilterTypeSchema,
+  InviteSeriesQuerySchema,
+  MemberCountSeriesQuerySchema,
+  MembersWithCountsQuerySchema,
+  MessageCountQuerySchema,
+  MessageSeriesQuerySchema,
+  SnowflakeSchema,
+  SortOrderSchema,
+  StatusSeriesQuerySchema,
+  TimeRangeQuerySchema,
+  TopActivitiesQuerySchema,
+  TopInviteMembersQuerySchema,
+  TopInvitesQuerySchema,
+  TopMessageChannelsQuerySchema,
+  TopMessageMembersQuerySchema,
+  TopPaginationQuerySchema,
+  TopVoiceChannelsQuerySchema,
+  TopVoiceMembersQuerySchema,
+  UniqueChannelCountSeriesQuerySchema,
+  UniqueCountStatSchema,
+  UniqueMemberCountSeriesQuerySchema,
+  VoiceCountQuerySchema,
+  VoiceSeriesQuerySchema,
+  VoiceStateSchema,
+} from "./validation.js";
 
-export interface TimeRangeQuery {
-  start?: number;
-  timezone_offset?: number;
-  interval?: Interval;
-  end?: number;
-}
+export type Snowflake = z.infer<typeof SnowflakeSchema>;
+export type Interval = z.infer<typeof IntervalSchema>;
+export type SortOrder = z.infer<typeof SortOrderSchema>;
+export type VoiceState = z.infer<typeof VoiceStateSchema>;
+export type InviteFlagFilterType = z.infer<typeof InviteFlagFilterTypeSchema>;
+export type UniqueCountStat = z.infer<typeof UniqueCountStatSchema>;
+export type ChannelFilterType = z.infer<typeof ChannelFilterTypeSchema>;
 
-export interface LimitOrderQuery {
-  limit?: number;
-  order?: SortOrder;
-}
-
-export interface TopPaginationQuery extends LimitOrderQuery {
-  page_size?: number;
-  page?: number;
-  select?: Snowflake[];
-  full?: boolean;
-}
-
-export interface MemberRoleFilters {
-  bot?: boolean;
-  whitelist_members?: Snowflake[];
-  blacklist_members?: Snowflake[];
-  whitelist_roles?: Snowflake[];
-  blacklist_roles?: Snowflake[];
-}
-
-export interface ChannelFilters {
-  whitelist_channels?: Snowflake[];
-  blacklist_channels?: Snowflake[];
-  whitelist_voice_channels?: Snowflake[];
-  blacklist_voice_channels?: Snowflake[];
-}
-
-export interface VoiceStateFilters {
-  voice_states?: VoiceState[];
-}
-
-export interface ActivityFilters {
-  whitelist_activities?: number[];
-  blacklist_activities?: number[];
-}
-
-export interface InviteFilters {
-  whitelist_invites?: number[];
-  blacklist_invites?: number[];
-  whitelist_invite_flags_mask?: number;
-  whitelist_invite_flags_type?: InviteFlagFilterType;
-  blacklist_invite_flags_mask?: number;
-  blacklist_invite_flags_type?: InviteFlagFilterType;
-}
-
-export interface MessageSeriesQuery
-  extends TimeRangeQuery,
-    LimitOrderQuery,
-    MemberRoleFilters,
-    ChannelFilters {
-  by_channel?: boolean;
-  by_member?: boolean;
-  by_flag?: boolean;
-}
-
-export interface VoiceSeriesQuery
-  extends TimeRangeQuery,
-    LimitOrderQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {
-  by_channel?: boolean;
-  by_member?: boolean;
-  by_state?: boolean;
-  by_flag?: boolean;
-}
-
-export interface ActivitySeriesQuery
-  extends TimeRangeQuery,
-    LimitOrderQuery,
-    Omit<MemberRoleFilters, "bot">,
-    ActivityFilters {
-  by_activity?: boolean;
-  by_member?: boolean;
-}
-
-export interface MemberCountSeriesQuery extends TimeRangeQuery, LimitOrderQuery {}
-
-export interface StatusSeriesQuery extends TimeRangeQuery, LimitOrderQuery {}
-
-export interface InviteSeriesQuery
-  extends TimeRangeQuery,
-    LimitOrderQuery,
-    MemberRoleFilters,
-    InviteFilters {
-  by_invite?: boolean;
-  by_inviter?: boolean;
-  by_invitee?: boolean;
-}
-
-export interface UniqueMemberCountSeriesQuery
-  extends TimeRangeQuery,
-    LimitOrderQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {
-  stats?: UniqueCountStat[];
-}
-
-export interface UniqueChannelCountSeriesQuery
-  extends TimeRangeQuery,
-    LimitOrderQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {
-  stats?: UniqueCountStat[];
-}
-
-export interface TopActivitiesQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    Omit<MemberRoleFilters, "bot">,
-    ActivityFilters {}
-
-export interface TopMessageMembersQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    MemberRoleFilters,
-    ChannelFilters {}
-
-export interface TopMessageChannelsQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    MemberRoleFilters,
-    ChannelFilters {}
-
-export interface TopVoiceMembersQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {}
-
-export interface TopVoiceChannelsQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {}
-
-export interface TopInvitesQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    MemberRoleFilters,
-    InviteFilters {}
-
-export interface TopInviteMembersQuery
-  extends TimeRangeQuery,
-    TopPaginationQuery,
-    MemberRoleFilters,
-    InviteFilters {}
-
-export interface MessageCountQuery
-  extends TimeRangeQuery,
-    MemberRoleFilters,
-    ChannelFilters {}
-
-export interface VoiceCountQuery
-  extends TimeRangeQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {}
-
-export interface MembersWithCountsQuery
-  extends TimeRangeQuery,
-    MemberRoleFilters,
-    ChannelFilters,
-    VoiceStateFilters {}
-
-export interface GetChannelsQuery {
-  types?: ChannelFilterType[];
-  ids?: Snowflake[];
-}
+export type TimeRangeQuery = z.infer<typeof TimeRangeQuerySchema>;
+export type TopPaginationQuery = z.infer<typeof TopPaginationQuerySchema>;
+export type ActivitySeriesQuery = z.infer<typeof ActivitySeriesQuerySchema>;
+export type MemberCountSeriesQuery = z.infer<typeof MemberCountSeriesQuerySchema>;
+export type StatusSeriesQuery = z.infer<typeof StatusSeriesQuerySchema>;
+export type InviteSeriesQuery = z.infer<typeof InviteSeriesQuerySchema>;
+export type MessageSeriesQuery = z.infer<typeof MessageSeriesQuerySchema>;
+export type VoiceSeriesQuery = z.infer<typeof VoiceSeriesQuerySchema>;
+export type UniqueMemberCountSeriesQuery = z.infer<
+  typeof UniqueMemberCountSeriesQuerySchema
+>;
+export type UniqueChannelCountSeriesQuery = z.infer<
+  typeof UniqueChannelCountSeriesQuerySchema
+>;
+export type TopActivitiesQuery = z.infer<typeof TopActivitiesQuerySchema>;
+export type TopMessageMembersQuery = z.infer<typeof TopMessageMembersQuerySchema>;
+export type TopMessageChannelsQuery = z.infer<typeof TopMessageChannelsQuerySchema>;
+export type TopVoiceMembersQuery = z.infer<typeof TopVoiceMembersQuerySchema>;
+export type TopVoiceChannelsQuery = z.infer<typeof TopVoiceChannelsQuerySchema>;
+export type TopInvitesQuery = z.infer<typeof TopInvitesQuerySchema>;
+export type TopInviteMembersQuery = z.infer<typeof TopInviteMembersQuerySchema>;
+export type MessageCountQuery = z.infer<typeof MessageCountQuerySchema>;
+export type VoiceCountQuery = z.infer<typeof VoiceCountQuerySchema>;
+export type MembersWithCountsQuery = z.infer<typeof MembersWithCountsQuerySchema>;
+export type GetChannelsQuery = z.infer<typeof GetChannelsQuerySchema>;

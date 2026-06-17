@@ -1,6 +1,6 @@
 # statbot-js
 
-Type-safe JavaScript SDK for the Statbot API, generated from the markdown route captures in [openapi](/C:/Users/floris/Documents/GitHub/statbot-js/openapi).
+Type-safe JavaScript SDK for the Statbot API, generated from the code-backed OpenAPI definitions in [openapi](/C:/Users/floris/Documents/GitHub/statbot-js/openapi).
 
 ## What this repo contains
 
@@ -32,6 +32,50 @@ const series = await client.getMessageSeries("123456789012345678", {
 
 const channels = await client.getChannels("123456789012345678", {
   types: [0, 999],
+});
+```
+
+## Runtime Validation
+
+The SDK now validates path params and query objects with Zod before sending requests.
+
+- Discord snowflakes such as `guildId`, `channelId`, member IDs, role IDs, and query ID arrays must be numeric strings between 17 and 20 digits.
+- Integer inputs such as `inviteId`, `limit`, `page`, and `page_size` must be positive integers.
+- Timestamp and filter objects are validated for shape and constraints.
+- Conflicting combinations such as `limit` with `page_size`/`page`, or whitelist and blacklist filters for the same field, fail early.
+
+Invalid input throws `StatbotValidationError`:
+
+```ts
+import {
+  StatbotClient,
+  StatbotValidationError,
+} from "statbot-js";
+
+const client = new StatbotClient();
+
+try {
+  await client.getChannel("not-a-snowflake", "234567890123456789");
+} catch (error) {
+  if (error instanceof StatbotValidationError) {
+    console.error(error.message);
+  }
+}
+```
+
+The Zod schemas are also exported directly if you want to validate or normalize inputs before calling the SDK:
+
+```ts
+import {
+  MessageSeriesQuerySchema,
+  SnowflakeSchema,
+} from "statbot-js";
+
+const guildId = SnowflakeSchema.parse("123456789012345678");
+const query = MessageSeriesQuerySchema.parse({
+  interval: "day",
+  whitelist_members: ["111111111111111111"],
+  by_member: true,
 });
 ```
 
