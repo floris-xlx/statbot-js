@@ -1,211 +1,77 @@
-import { StatbotClient } from "../src/index.js";
+import { getActivitiesExample } from "./routes/get-activities.js";
+import { getActivitySeriesExample } from "./routes/get-activity-series.js";
+import { getTopActivitiesExample } from "./routes/get-top-activities.js";
+import { getMessageSeriesExample } from "./routes/get-message-series.js";
+import { getTopMessageMembersExample } from "./routes/get-top-message-members.js";
+import { getTopMessageChannelsExample } from "./routes/get-top-message-channels.js";
+import { getMessageCountExample } from "./routes/get-message-count.js";
+import { getVoiceSeriesExample } from "./routes/get-voice-series.js";
+import { getTopVoiceMembersExample } from "./routes/get-top-voice-members.js";
+import { getTopVoiceChannelsExample } from "./routes/get-top-voice-channels.js";
+import { getVoiceCountExample } from "./routes/get-voice-count.js";
+import { getMemberCountSeriesExample } from "./routes/get-member-count-series.js";
+import { getStatusSeriesExample } from "./routes/get-status-series.js";
+import { getUniqueMemberCountSeriesExample } from "./routes/get-unique-member-count-series.js";
+import { getUniqueChannelCountSeriesExample } from "./routes/get-unique-channel-count-series.js";
+import { getMembersWithCountsExample } from "./routes/get-members-with-counts.js";
+import { getInviteSeriesExample } from "./routes/get-invite-series.js";
+import { getTopInvitesExample } from "./routes/get-top-invites.js";
+import { getTopInviteMembersExample } from "./routes/get-top-invite-members.js";
+import { getInviteExample } from "./routes/get-invite.js";
+import { getInvitesExample } from "./routes/get-invites.js";
+import { getChannelExample } from "./routes/get-channel.js";
+import { getChannelsExample } from "./routes/get-channels.js";
 
-const client = new StatbotClient({
-  token: process.env.STATBOT_TOKEN ?? "statbot_example_token",
-});
-
-const guildId = "123456789012345678";
-const channelId = "234567890123456789";
-const inviteId = 456;
-const memberId = "111111111111111111";
-const roleId = "333333333333333333";
-const textChannelId = "444444444444444444";
-const voiceChannelId = "555555555555555555";
-
-export async function activityExamples() {
-  const activities = await client.getActivities();
-
-  const activitySeries = await client.getActivitySeries(guildId, {
-    interval: "day",
-    start: 1735689600000,
-    end: 1736294400000,
-    whitelist_activities: [791],
-    by_activity: true,
-  });
-
-  const topActivities = await client.getTopActivities(guildId, {
-    interval: "week",
-    page_size: 10,
-    page: 1,
-    order: "desc",
-  });
-
-  return {
-    activities,
-    activitySeries,
-    topActivities,
-  };
-}
-
-export async function messageExamples() {
-  const messageSeries = await client.getMessageSeries(guildId, {
-    interval: "day",
-    whitelist_members: [memberId],
-    whitelist_channels: [textChannelId],
-    by_member: true,
-  });
-
-  const topMessageMembers = await client.getTopMessageMembers(guildId, {
-    interval: "month",
-    full: true,
-    limit: 10,
-  });
-
-  const topMessageChannels = await client.getTopMessageChannels(guildId, {
-    interval: "week",
-    full: true,
-    page_size: 10,
-    page: 1,
-  });
-
-  const messageCount = await client.getMessageCount(guildId, {
-    start: 1735689600000,
-    end: 1736294400000,
-    bot: false,
-  });
-
-  return {
-    messageSeries,
-    topMessageMembers,
-    topMessageChannels,
-    messageCount,
-  };
-}
-
-export async function voiceExamples() {
-  const voiceSeries = await client.getVoiceSeries(guildId, {
-    interval: "day",
-    voice_states: ["normal", "afk"],
-    by_state: true,
-  });
-
-  const topVoiceMembers = await client.getTopVoiceMembers(guildId, {
-    interval: "week",
-    full: true,
-    voice_states: ["normal"],
-    limit: 10,
-  });
-
-  const topVoiceChannels = await client.getTopVoiceChannels(guildId, {
-    interval: "week",
-    full: true,
-    voice_states: ["normal", "self_mute"],
-    page_size: 10,
-    page: 1,
-  });
-
-  const voiceCount = await client.getVoiceCount(guildId, {
-    interval: "month",
-    voice_states: ["normal"],
-  });
-
-  return {
-    voiceSeries,
-    topVoiceMembers,
-    topVoiceChannels,
-    voiceCount,
-  };
-}
-
-export async function guildCountExamples() {
-  const memberCountSeries = await client.getMemberCountSeries(guildId, {
-    interval: "day",
-    limit: 30,
-  });
-
-  const statusSeries = await client.getStatusSeries(guildId, {
-    interval: "hour",
-    limit: 24,
-    order: "asc",
-  });
-
-  const uniqueMemberCountSeries = await client.getUniqueMemberCountSeries(guildId, {
-    stats: ["text", "voice"],
-    interval: "day",
-    whitelist_roles: [roleId],
-    voice_states: ["normal"],
-  });
-
-  const uniqueChannelCountSeries = await client.getUniqueChannelCountSeries(guildId, {
-    stats: ["text"],
-    interval: "day",
-    whitelist_channels: [textChannelId],
-  });
-
-  const membersWithCounts = await client.getMembersWithCounts(guildId, {
-    interval: "week",
-    whitelist_roles: [roleId],
-    whitelist_voice_channels: [voiceChannelId],
-  });
-
-  return {
-    memberCountSeries,
-    statusSeries,
-    uniqueMemberCountSeries,
-    uniqueChannelCountSeries,
-    membersWithCounts,
-  };
-}
-
-export async function inviteExamples() {
-  const inviteSeries = await client.getInviteSeries(guildId, {
-    interval: "day",
-    whitelist_invites: [inviteId],
-    by_inviter: true,
-  });
-
-  const topInvites = await client.getTopInvites(guildId, {
-    interval: "month",
-    full: true,
-    limit: 15,
-  });
-
-  const topInviteMembers = await client.getTopInviteMembers(guildId, {
-    interval: "month",
-    full: true,
-    page_size: 20,
-    page: 1,
-  });
-
-  const invite = await client.getInvite(guildId, inviteId);
-  const invites = await client.getInvites(guildId);
-
-  return {
-    inviteSeries,
-    topInvites,
-    topInviteMembers,
-    invite,
-    invites,
-  };
-}
-
-export async function channelExamples() {
-  const channel = await client.getChannel(guildId, channelId);
-  const channels = await client.getChannels(guildId, {
-    types: [0, 13, 999],
-    ids: [channelId, textChannelId],
-  });
-
-  return {
-    channel,
-    channels,
-  };
-}
+export {
+  getActivitiesExample,
+  getActivitySeriesExample,
+  getTopActivitiesExample,
+  getMessageSeriesExample,
+  getTopMessageMembersExample,
+  getTopMessageChannelsExample,
+  getMessageCountExample,
+  getVoiceSeriesExample,
+  getTopVoiceMembersExample,
+  getTopVoiceChannelsExample,
+  getVoiceCountExample,
+  getMemberCountSeriesExample,
+  getStatusSeriesExample,
+  getUniqueMemberCountSeriesExample,
+  getUniqueChannelCountSeriesExample,
+  getMembersWithCountsExample,
+  getInviteSeriesExample,
+  getTopInvitesExample,
+  getTopInviteMembersExample,
+  getInviteExample,
+  getInvitesExample,
+  getChannelExample,
+  getChannelsExample,
+};
 
 export async function allRouteExamples() {
-  const activities = await activityExamples();
-  const messages = await messageExamples();
-  const voice = await voiceExamples();
-  const guildCounts = await guildCountExamples();
-  const invites = await inviteExamples();
-  const channels = await channelExamples();
-
   return {
-    activities,
-    messages,
-    voice,
-    guildCounts,
-    invites,
-    channels,
+    getActivities: await getActivitiesExample(),
+    getActivitySeries: await getActivitySeriesExample(),
+    getTopActivities: await getTopActivitiesExample(),
+    getMessageSeries: await getMessageSeriesExample(),
+    getTopMessageMembers: await getTopMessageMembersExample(),
+    getTopMessageChannels: await getTopMessageChannelsExample(),
+    getMessageCount: await getMessageCountExample(),
+    getVoiceSeries: await getVoiceSeriesExample(),
+    getTopVoiceMembers: await getTopVoiceMembersExample(),
+    getTopVoiceChannels: await getTopVoiceChannelsExample(),
+    getVoiceCount: await getVoiceCountExample(),
+    getMemberCountSeries: await getMemberCountSeriesExample(),
+    getStatusSeries: await getStatusSeriesExample(),
+    getUniqueMemberCountSeries: await getUniqueMemberCountSeriesExample(),
+    getUniqueChannelCountSeries: await getUniqueChannelCountSeriesExample(),
+    getMembersWithCounts: await getMembersWithCountsExample(),
+    getInviteSeries: await getInviteSeriesExample(),
+    getTopInvites: await getTopInvitesExample(),
+    getTopInviteMembers: await getTopInviteMembersExample(),
+    getInvite: await getInviteExample(),
+    getInvites: await getInvitesExample(),
+    getChannel: await getChannelExample(),
+    getChannels: await getChannelsExample(),
   };
 }

@@ -21,6 +21,7 @@ interface OpenApiDocument {
 const openapiDir = path.resolve(process.cwd(), "openapi");
 const openapiJsonPath = path.join(openapiDir, "openapi.json");
 const openapiYamlPath = path.join(openapiDir, "openapi.yaml");
+const exampleRoutesDir = path.resolve(process.cwd(), "examples", "routes");
 
 function readOpenApiJson() {
   return JSON.parse(fs.readFileSync(openapiJsonPath, "utf8")) as OpenApiDocument;
@@ -28,6 +29,10 @@ function readOpenApiJson() {
 
 function readOpenApiYaml() {
   return YAML.parse(fs.readFileSync(openapiYamlPath, "utf8")) as OpenApiDocument;
+}
+
+function toExampleFileName(operationId: string) {
+  return operationId.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase() + ".ts";
 }
 
 describe("OpenAPI artifacts", () => {
@@ -55,6 +60,20 @@ describe("OpenAPI artifacts", () => {
     expect(validatedYaml.openapi).toBe("3.1.0");
     expect(Object.keys(validatedJson.paths)).toHaveLength(23);
     expect(Object.keys(validatedYaml.paths)).toHaveLength(23);
+  });
+
+  it("keeps one typed example file per OpenAPI operation", () => {
+    const spec = readOpenApiJson();
+    const operationIds = Object.values(spec.paths)
+      .flatMap((pathItem) => (pathItem.get ? [pathItem.get.operationId] : []))
+      .sort();
+
+    const exampleFiles = fs
+      .readdirSync(exampleRoutesDir)
+      .filter((entry) => entry.endsWith(".ts"))
+      .sort();
+
+    expect(exampleFiles).toStrictEqual(operationIds.map(toExampleFileName).sort());
   });
 
   it("keeps StatbotClient methods aligned with OpenAPI operationIds", () => {
