@@ -63,7 +63,6 @@ const document = {
   "x-generated-from": {
     routeMarkdownCount: routePages.size,
     documentedOperations: routeCount,
-    generatedAt: new Date().toISOString(),
   },
 };
 
