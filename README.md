@@ -2,7 +2,9 @@
 
 current version: `0.1.0`
 
-Type-safe JavaScript SDK for the Statbot API, generated from the code-backed OpenAPI definitions in [openapi](/C:/Users/floris/Documents/GitHub/statbot-js/openapi).
+Type-safe JavaScript SDK for the Statbot API, generated from the code-backed OpenAPI definitions in [openapi](openapi).
+
+Developed by [XYLEX Group](https://xylex.group).
 
 ## What this repo contains
 
@@ -92,9 +94,9 @@ The SDK currently covers every distinct captured Statbot route:
 - Invites: `getInviteSeries`, `getTopInvites`, `getTopInviteMembers`, `getInvite`, `getInvites`
 - Channels: `getChannel`, `getChannels`
 
-Full route-by-route examples live in [docs/routes-and-examples.md](/C:/Users/floris/Documents/GitHub/statbot-js/docs/routes-and-examples.md) and as typed per-route files in [examples/routes/get-activities.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-activities.ts).
+Full route-by-route examples live in [docs/routes-and-examples.md](docs/routes-and-examples.md) and as typed per-route files in [examples/routes/get-activities.ts](examples/routes/get-activities.ts).
 
-For a combined module that re-exports every per-route example and can invoke them together, see [examples/all-routes.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/all-routes.ts).
+For a combined module that re-exports every per-route example and can invoke them together, see [examples/all-routes.ts](examples/all-routes.ts).
 
 ## Example Patterns
 

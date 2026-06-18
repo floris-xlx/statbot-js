@@ -1,0 +1,26 @@
+{
+  "name": "delete_row",
+  "description": "Delete a row by primary key (resource_id). Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table": {
+        "type": "string",
+        "description": "Table name (optionally schema-qualified)"
+      },
+      "resource_id": {
+        "type": "string",
+        "description": "Primary key value of the row to delete"
+      },
+      "schema": {
+        "description": "Optional schema when table name is not schema-qualified",
+        "type": "string"
+      }
+    },
+    "required": [
+      "table",
+      "resource_id"
+    ]
+  }
+}

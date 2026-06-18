@@ -1,0 +1,9 @@
+{
+  "name": "list_registry_entries",
+  "description": "List API registry entries from Athena.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

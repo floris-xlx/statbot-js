@@ -1,0 +1,21 @@
+{
+  "name": "apply_migration",
+  "description": "Apply a SQL migration against the connected database. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "sql": {
+        "type": "string",
+        "description": "The SQL migration to execute"
+      },
+      "name": {
+        "description": "Optional migration name / label for reference",
+        "type": "string"
+      }
+    },
+    "required": [
+      "sql"
+    ]
+  }
+}

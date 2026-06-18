@@ -1,0 +1,21 @@
+{
+  "name": "create_api_key_right",
+  "description": "Create an Athena API key right. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Right name"
+      },
+      "description": {
+        "description": "Optional description",
+        "type": "string"
+      }
+    },
+    "required": [
+      "name"
+    ]
+  }
+}

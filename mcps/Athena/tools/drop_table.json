@@ -1,0 +1,25 @@
+{
+  "name": "drop_table",
+  "description": "Drop a managed table through Athena's management API. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "type": "string",
+        "description": "Target table name"
+      },
+      "schema_name": {
+        "description": "Schema name (defaults to public)",
+        "type": "string"
+      },
+      "cascade": {
+        "description": "Whether to cascade the drop",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "table_name"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "list_router_registry",
+  "description": "List Athena router registry entries.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

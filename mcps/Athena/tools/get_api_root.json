@@ -1,0 +1,9 @@
+{
+  "name": "get_api_root",
+  "description": "Fetch Athena API root metadata, including the advertised route list.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

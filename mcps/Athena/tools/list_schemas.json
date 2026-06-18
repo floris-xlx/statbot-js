@@ -1,0 +1,14 @@
+{
+  "name": "list_schemas",
+  "description": "List database schemas visible to the current Athena client",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "include_system": {
+        "description": "Include system schemas such as pg_catalog and information_schema",
+        "type": "boolean"
+      }
+    }
+  }
+}

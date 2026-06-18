@@ -1,0 +1,30 @@
+{
+  "name": "execute_sql",
+  "description": "Execute a raw SQL query against the connected database. Write operations are blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "The SQL query to execute"
+      },
+      "driver": {
+        "description": "Driver to use (defaults to 'postgresql')",
+        "type": "string",
+        "enum": [
+          "athena",
+          "postgresql",
+          "supabase"
+        ]
+      },
+      "db_name": {
+        "description": "Database name (used by /query/sql endpoint)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "query"
+    ]
+  }
+}

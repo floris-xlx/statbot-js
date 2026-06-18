@@ -1,0 +1,9 @@
+{
+  "name": "list_extensions",
+  "description": "List all installed PostgreSQL extensions. May return empty if the gateway does not expose extension metadata.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

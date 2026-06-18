@@ -1,0 +1,17 @@
+{
+  "name": "delete_api_key_right",
+  "description": "Delete an Athena API key right. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "API key right UUID"
+      }
+    },
+    "required": [
+      "id"
+    ]
+  }
+}

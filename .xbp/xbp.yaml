@@ -5,7 +5,7 @@ build_dir: ./
 crate_name: null
 database: null
 environment: null
-github: null
+github: xylex-group/statbot-js
 install_command: npm install
 kafka_brokers: null
 kafka_public_url: null

@@ -1,0 +1,14 @@
+{
+  "name": "list_all_table_metadata",
+  "description": "Return metadata for all tables in one call: schema, name, columns, types, defaults, nullable. Uses Athena schema API.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "schema": {
+        "description": "Optional schema to limit to (default: all user schemas)",
+        "type": "string"
+      }
+    }
+  }
+}

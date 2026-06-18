@@ -1,0 +1,156 @@
+{
+  "name": "edit_table",
+  "description": "Apply safe additive ALTER TABLE operations through Athena's management API. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "type": "string",
+        "description": "Target table name"
+      },
+      "schema_name": {
+        "description": "Schema name (defaults to public)",
+        "type": "string"
+      },
+      "operations": {
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "add_column"
+                },
+                "column": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Column name"
+                    },
+                    "data_type": {
+                      "type": "string",
+                      "description": "PostgreSQL data type"
+                    },
+                    "nullable": {
+                      "description": "Whether the column is nullable",
+                      "type": "boolean"
+                    },
+                    "default_expression": {
+                      "description": "Optional SQL default expression",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "data_type"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "column"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "rename_column"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "from",
+                "to"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "set_default"
+                },
+                "column_name": {
+                  "type": "string"
+                },
+                "default_expression": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "column_name",
+                "default_expression"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "drop_default"
+                },
+                "column_name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "column_name"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "set_not_null"
+                },
+                "column_name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "column_name"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "drop_not_null"
+                },
+                "column_name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "column_name"
+              ]
+            }
+          ]
+        },
+        "description": "Ordered table alteration operations"
+      }
+    },
+    "required": [
+      "table_name",
+      "operations"
+    ]
+  }
+}

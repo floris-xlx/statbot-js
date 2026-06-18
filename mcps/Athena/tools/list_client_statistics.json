@@ -1,0 +1,9 @@
+{
+  "name": "list_client_statistics",
+  "description": "List aggregated Athena client statistics from gateway logs.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

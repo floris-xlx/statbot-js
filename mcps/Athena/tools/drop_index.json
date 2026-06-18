@@ -1,0 +1,21 @@
+{
+  "name": "drop_index",
+  "description": "Drop an index through Athena's management API. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "index_name": {
+        "type": "string",
+        "description": "Index name to drop"
+      },
+      "schema_name": {
+        "description": "Schema name (defaults to public)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "index_name"
+    ]
+  }
+}

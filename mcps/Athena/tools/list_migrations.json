@@ -1,0 +1,14 @@
+{
+  "name": "list_migrations",
+  "description": "List applied database migrations",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "description": "Migrations table name (defaults to 'schema_migrations')",
+        "type": "string"
+      }
+    }
+  }
+}

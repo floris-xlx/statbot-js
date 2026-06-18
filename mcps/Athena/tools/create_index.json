@@ -1,0 +1,41 @@
+{
+  "name": "create_index",
+  "description": "Create an index through Athena's management API. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "type": "string",
+        "description": "Target table name"
+      },
+      "columns": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Columns included in the index"
+      },
+      "schema_name": {
+        "description": "Schema name (defaults to public)",
+        "type": "string"
+      },
+      "index_name": {
+        "description": "Optional explicit index name",
+        "type": "string"
+      },
+      "unique": {
+        "description": "Whether the index is unique",
+        "type": "boolean"
+      },
+      "method": {
+        "description": "Index access method (defaults to btree)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "table_name",
+      "columns"
+    ]
+  }
+}

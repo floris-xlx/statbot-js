@@ -1,0 +1,47 @@
+{
+  "name": "get_row_by_eq_column_of_table",
+  "description": "Fetch rows from a table where `column = value` using Athena's fetch endpoint",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table": {
+        "type": "string",
+        "description": "Table name to query (optionally schema-qualified)"
+      },
+      "column": {
+        "type": "string",
+        "description": "Column name to match against"
+      },
+      "value": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ],
+        "description": "Value to compare (converted to string for Athena)"
+      },
+      "schema": {
+        "description": "Optional schema to override the table name",
+        "type": "string"
+      },
+      "limit": {
+        "description": "Maximum number of rows to return (defaults to 100)",
+        "type": "integer",
+        "exclusiveMinimum": 0,
+        "maximum": 9007199254740991
+      }
+    },
+    "required": [
+      "table",
+      "column",
+      "value"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "get_columns_of_table",
+  "description": "Describe columns for a table using Athena's schema API",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table": {
+        "type": "string",
+        "description": "Table name (optionally schema-qualified) to describe"
+      },
+      "schema": {
+        "description": "Optional schema name when the table name is not schema-qualified",
+        "type": "string"
+      }
+    },
+    "required": [
+      "table"
+    ]
+  }
+}

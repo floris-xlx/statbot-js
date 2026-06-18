@@ -1,0 +1,9 @@
+{
+  "name": "refresh_client_statistics",
+  "description": "Rebuild Athena client statistics from gateway logs. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

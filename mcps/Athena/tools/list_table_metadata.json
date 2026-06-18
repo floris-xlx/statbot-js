@@ -1,0 +1,21 @@
+{
+  "name": "list_table_metadata",
+  "description": "Return the full metadata for a table: schema name, table name, and each column's name, type, default value, and nullable flag",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table": {
+        "type": "string",
+        "description": "Table name (optionally schema-qualified)"
+      },
+      "schema": {
+        "description": "Optional schema name when the table name is not schema-qualified",
+        "type": "string"
+      }
+    },
+    "required": [
+      "table"
+    ]
+  }
+}

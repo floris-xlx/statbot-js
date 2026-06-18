@@ -1,0 +1,93 @@
+{
+  "name": "run_pipeline",
+  "description": "Run a config-driven Athena pipeline (source -> transform -> sink).",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "pipeline": {
+        "description": "Optional prebuilt pipeline name from Athena config",
+        "type": "string"
+      },
+      "source": {
+        "description": "Pipeline source config",
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "type": "string"
+          },
+          "view_name": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "eq_column": {
+                  "type": "string"
+                },
+                "eq_value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "eq_column",
+                "eq_value"
+              ]
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          }
+        }
+      },
+      "transform": {
+        "description": "Pipeline transform config",
+        "type": "object",
+        "properties": {
+          "group_by": {
+            "type": "string"
+          },
+          "time_granularity": {
+            "type": "string",
+            "enum": [
+              "day",
+              "hour",
+              "minute"
+            ]
+          },
+          "aggregation_column": {
+            "type": "string"
+          },
+          "aggregation_strategy": {
+            "type": "string",
+            "enum": [
+              "cumulative_sum"
+            ]
+          },
+          "aggregation_dedup": {
+            "type": "boolean"
+          }
+        }
+      },
+      "sink": {
+        "description": "Pipeline sink config",
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "toggle_supabase_ssl_enforcement",
+  "description": "Enable or disable Supabase SSL enforcement for a project. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "description": "Whether Supabase SSL enforcement should be enabled"
+      },
+      "access_token": {
+        "description": "Optional override for SUPABASE_ACCESS_TOKEN",
+        "type": "string"
+      },
+      "project_ref": {
+        "description": "Optional override for PROJECT_REF",
+        "type": "string"
+      }
+    },
+    "required": [
+      "enabled"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "search_columns",
+  "description": "Find tables and columns by name pattern. Speeds up schema discovery.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "pattern": {
+        "type": "string",
+        "description": "Column or table name pattern (SQL LIKE, use % for wildcard)"
+      },
+      "schema": {
+        "description": "Optional schema to limit search",
+        "type": "string"
+      }
+    },
+    "required": [
+      "pattern"
+    ]
+  }
+}

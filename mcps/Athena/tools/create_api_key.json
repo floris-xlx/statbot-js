@@ -1,0 +1,36 @@
+{
+  "name": "create_api_key",
+  "description": "Create an Athena API key. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Human-readable API key name"
+      },
+      "description": {
+        "description": "Optional description",
+        "type": "string"
+      },
+      "client_name": {
+        "description": "Optional client binding for this key",
+        "type": "string"
+      },
+      "expires_at": {
+        "description": "Optional ISO date-time expiry",
+        "type": "string"
+      },
+      "rights": {
+        "description": "Rights to grant",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "name"
+    ]
+  }
+}

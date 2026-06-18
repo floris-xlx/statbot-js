@@ -1,0 +1,54 @@
+{
+  "name": "create_table",
+  "description": "Create a managed table through Athena's management API. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table_name": {
+        "type": "string",
+        "description": "Table name to create"
+      },
+      "schema_name": {
+        "description": "Schema name (defaults to public)",
+        "type": "string"
+      },
+      "columns": {
+        "description": "Optional column definitions",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Column name"
+            },
+            "data_type": {
+              "type": "string",
+              "description": "PostgreSQL data type"
+            },
+            "nullable": {
+              "description": "Whether the column is nullable",
+              "type": "boolean"
+            },
+            "default_expression": {
+              "description": "Optional SQL default expression",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "data_type"
+          ]
+        }
+      },
+      "if_not_exists": {
+        "description": "Compatibility flag accepted by Athena",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "table_name"
+    ]
+  }
+}

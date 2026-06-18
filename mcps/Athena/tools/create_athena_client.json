@@ -1,0 +1,29 @@
+{
+  "name": "create_athena_client",
+  "description": "Create an Athena client in the admin catalog. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "client_name": {
+        "type": "string",
+        "description": "Athena client name"
+      },
+      "description": {
+        "type": "string"
+      },
+      "pg_uri": {
+        "type": "string"
+      },
+      "pg_uri_env_var": {
+        "type": "string"
+      },
+      "is_active": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "client_name"
+    ]
+  }
+}

@@ -1,4 +1,14 @@
 {
+  "author": "xylex-group",
+  "bugs": {
+    "url": "https://github.com/xylex-group/statbot-js/issues"
+  },
+  "contributors": [
+    {
+      "name": "XYLEX Group",
+      "url": "https://xylex.group"
+    }
+  ],
   "dependencies": {
     "openapi-fetch": "^0.17.0",
     "zod": "^4.4.3"
@@ -24,6 +34,7 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "homepage": "https://github.com/xylex-group/statbot-js#readme",
   "files": [
     "dist",
     "openapi/openapi.json",
@@ -41,6 +52,11 @@
   "license": "MIT",
   "main": "./dist/index.cjs",
   "name": "statbot-js",
+  "publisher": "XYLEX Group",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xylex-group/statbot-js.git"
+  },
   "scripts": {
     "build": "npm run generate && tsup",
     "clean": "rimraf dist src/generated/openapi-types.ts openapi/openapi.json openapi/openapi.yaml",

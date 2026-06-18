@@ -1,0 +1,9 @@
+{
+  "name": "list_athena_clients_admin",
+  "description": "List Athena clients from the database-backed admin catalog.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

@@ -1,5 +1,7 @@
 # Routes And Examples
 
+Developed by [XYLEX Group](https://xylex.group).
+
 All captured Statbot routes currently require bearer authentication.
 
 ```ts
@@ -20,12 +22,12 @@ const inviteId = 456;
 
 ## Typed Example Files
 
-- Activities: [get-activities.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-activities.ts), [get-activity-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-activity-series.ts), [get-top-activities.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-activities.ts)
-- Messages: [get-message-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-message-series.ts), [get-top-message-members.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-message-members.ts), [get-top-message-channels.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-message-channels.ts), [get-message-count.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-message-count.ts)
-- Voice: [get-voice-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-voice-series.ts), [get-top-voice-members.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-voice-members.ts), [get-top-voice-channels.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-voice-channels.ts), [get-voice-count.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-voice-count.ts)
-- Guild counts: [get-member-count-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-member-count-series.ts), [get-status-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-status-series.ts), [get-unique-member-count-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-unique-member-count-series.ts), [get-unique-channel-count-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-unique-channel-count-series.ts), [get-members-with-counts.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-members-with-counts.ts)
-- Invites: [get-invite-series.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-invite-series.ts), [get-top-invites.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-invites.ts), [get-top-invite-members.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-top-invite-members.ts), [get-invite.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-invite.ts), [get-invites.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-invites.ts)
-- Channels: [get-channel.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-channel.ts), [get-channels.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/routes/get-channels.ts)
+- Activities: [get-activities.ts](../examples/routes/get-activities.ts), [get-activity-series.ts](../examples/routes/get-activity-series.ts), [get-top-activities.ts](../examples/routes/get-top-activities.ts)
+- Messages: [get-message-series.ts](../examples/routes/get-message-series.ts), [get-top-message-members.ts](../examples/routes/get-top-message-members.ts), [get-top-message-channels.ts](../examples/routes/get-top-message-channels.ts), [get-message-count.ts](../examples/routes/get-message-count.ts)
+- Voice: [get-voice-series.ts](../examples/routes/get-voice-series.ts), [get-top-voice-members.ts](../examples/routes/get-top-voice-members.ts), [get-top-voice-channels.ts](../examples/routes/get-top-voice-channels.ts), [get-voice-count.ts](../examples/routes/get-voice-count.ts)
+- Guild counts: [get-member-count-series.ts](../examples/routes/get-member-count-series.ts), [get-status-series.ts](../examples/routes/get-status-series.ts), [get-unique-member-count-series.ts](../examples/routes/get-unique-member-count-series.ts), [get-unique-channel-count-series.ts](../examples/routes/get-unique-channel-count-series.ts), [get-members-with-counts.ts](../examples/routes/get-members-with-counts.ts)
+- Invites: [get-invite-series.ts](../examples/routes/get-invite-series.ts), [get-top-invites.ts](../examples/routes/get-top-invites.ts), [get-top-invite-members.ts](../examples/routes/get-top-invite-members.ts), [get-invite.ts](../examples/routes/get-invite.ts), [get-invites.ts](../examples/routes/get-invites.ts)
+- Channels: [get-channel.ts](../examples/routes/get-channel.ts), [get-channels.ts](../examples/routes/get-channels.ts)
 
 ## Activities
 
@@ -308,4 +310,4 @@ const channels = await client.getChannels(guildId, {
 
 ## Combined Example Module
 
-For a single typed module that re-exports and can invoke every route example, see [examples/all-routes.ts](/C:/Users/floris/Documents/GitHub/statbot-js/examples/all-routes.ts).
+For a single typed module that re-exports and can invoke every route example, see [examples/all-routes.ts](../examples/all-routes.ts).

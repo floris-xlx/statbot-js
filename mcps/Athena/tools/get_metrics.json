@@ -1,0 +1,9 @@
+{
+  "name": "get_metrics",
+  "description": "Fetch Athena's Prometheus metrics payload.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

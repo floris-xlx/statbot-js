@@ -1,0 +1,17 @@
+{
+  "name": "delete_api_key_client",
+  "description": "Delete a per-client Athena API key enforcement override. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "client_name": {
+        "type": "string",
+        "description": "Athena client name"
+      }
+    },
+    "required": [
+      "client_name"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "insert_row",
+  "description": "Insert a row into a table. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "table": {
+        "type": "string",
+        "description": "Table name (optionally schema-qualified)"
+      },
+      "data": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string"
+        },
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "description": "Row data as key-value pairs"
+      },
+      "schema": {
+        "description": "Optional schema when table name is not schema-qualified",
+        "type": "string"
+      }
+    },
+    "required": [
+      "table",
+      "data"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "get_api_key_config",
+  "description": "Read the global Athena API key enforcement configuration.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {}
+  }
+}

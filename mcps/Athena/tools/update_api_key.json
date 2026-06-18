@@ -1,0 +1,38 @@
+{
+  "name": "update_api_key",
+  "description": "Update an existing Athena API key. Blocked when read_only mode is enabled.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "API key UUID"
+      },
+      "name": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "client_name": {
+        "type": "string"
+      },
+      "expires_at": {
+        "type": "string"
+      },
+      "is_active": {
+        "type": "boolean"
+      },
+      "rights": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "id"
+    ]
+  }
+}
