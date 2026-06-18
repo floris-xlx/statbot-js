@@ -34,7 +34,6 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "homepage": "https://github.com/xylex-group/statbot-js#readme",
   "files": [
     "dist",
     "openapi/openapi.json",
@@ -42,6 +41,7 @@
     "README.md",
     "LICENSE"
   ],
+  "homepage": "https://github.com/xylex-group/statbot-js#readme",
   "keywords": [
     "statbot",
     "discord",
